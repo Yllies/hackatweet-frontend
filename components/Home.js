@@ -1,12 +1,12 @@
 //
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { login, logout } from "../reducers/user";
 import { Modal } from "antd";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 function Home() {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ function Home() {
   const [signInUsername, setSignInUsername] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const router = useRouter();
 
   //   useEffect(() => {}, []);
 
@@ -45,6 +46,7 @@ function Home() {
           setSignUpUsername("");
           setSignUpPassword("");
           console.log("Inscription OK", user);
+          router.push("/tweets");
         } else {
           console.log("Inscription échouée", data);
         }
@@ -71,7 +73,6 @@ function Home() {
           );
           setSignInUsername("");
           setSignInPassword("");
-          <Link href="/profile">Go to profile page</Link>;
         } else {
           console.log("Connexion échouée", data);
         }
